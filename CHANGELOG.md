@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.53.2-alpha.c1ac2c38bec47416251134299cec8b83a763730f](https://github.com/bigcommerce/checkout-sdk-js/compare/v1.53.1...v1.53.2-alpha.c1ac2c38bec47416251134299cec8b83a763730f) (2020-03-12)
+
+
+### Features
+
+* **payment:** INT-2113 Checkout button strategy ([c1ac2c3](https://github.com/bigcommerce/checkout-sdk-js/commit/c1ac2c3))
+
 ### [1.53.1](https://github.com/bigcommerce/checkout-sdk-js/compare/v1.53.0...v1.53.1) (2020-02-24)
 
 
