@@ -1,5 +1,5 @@
 import { CheckoutStore, InternalCheckoutSelectors } from '../../../checkout';
-import { InvalidArgumentError, MissingDataError, MissingDataErrorType, NotInitializedError, NotInitializedErrorType, RequestError } from '../../../common/error/errors';
+import { InvalidArgumentError, MissingDataError, MissingDataErrorType } from '../../../common/error/errors';
 import { OrderRequestBody } from '../../../order';
 import PaymentMethod from '../../payment-method';
 import { PaymentInitializeOptions, PaymentRequestOptions } from '../../payment-request-options';
@@ -25,27 +25,39 @@ export default class AmazonMaxoPaymentStrategy implements PaymentStrategy {
     initialize(options: PaymentInitializeOptions): Promise<InternalCheckoutSelectors> {
         const { amazonmaxo: amazonMaxoOptions, methodId } = options;
         const state = this._store.getState();
-        const paymentMethod = state.paymentMethods.getPaymentMethod(methodId);
+        this._paymentMethod = state.paymentMethods.getPaymentMethod(methodId);
 
         if (!amazonMaxoOptions) {
             throw new InvalidArgumentError('Unable to initialize payment because "options.amazonmaxo" argument is not provided.');
         }
 
-        if (!paymentMethod) {
+        if (!this._paymentMethod) {
             throw new MissingDataError(MissingDataErrorType.MissingPaymentMethod);
         }
 
-        return this._amazonMaxoScriptLoader.load(paymentMethod).then();
+        return this._amazonMaxoScriptLoader.load(this._paymentMethod).then();
 
     }
 
     execute(payload: OrderRequestBody, options?: PaymentRequestOptions | undefined): Promise<InternalCheckoutSelectors> {
+        if (!payload) {
+            throw new InvalidArgumentError('Unable to initialize payment because "options.amazonmaxo" argument is not provided.');
+        }
+        if (!options) {
+            throw new InvalidArgumentError('Unable to initialize payment because "options.amazonmaxo" argument is not provided.');
+        }
         throw new Error('Method not implemented.');
     }
     finalize(options?: PaymentRequestOptions | undefined): Promise<InternalCheckoutSelectors> {
+        if (!options) {
+            throw new InvalidArgumentError('Unable to initialize payment because "options.amazonmaxo" argument is not provided.');
+        }
         throw new Error('Method not implemented.');
     }
     deinitialize(options?: PaymentRequestOptions | undefined): Promise<InternalCheckoutSelectors> {
+        if (!options) {
+            throw new InvalidArgumentError('Unable to initialize payment because "options.amazonmaxo" argument is not provided.');
+        }
         throw new Error('Method not implemented.');
     }
 }
